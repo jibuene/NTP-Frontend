@@ -1,0 +1,5 @@
+<div *ngIf="productData.length > 0">
+  <div *ngFor="let product of productData" class="">
+    <app-shop-card [product]="product"></app-shop-card>
+  </div>
+</div>
