@@ -1,22 +1,26 @@
-    <div class="">
-    <!-- <mat-card>
-      {{ product | json }}
-    </mat-card> -->
-    <mat-card class="product-card">
-      <mat-card-title>{{ product.ProductName }}</mat-card-title>
-      <mat-card-content>
-        <mat-form-field class="example-full-width" appearance="fill">
-          <input [(ngModel)]="orderAmount" (ngModelChange)="calculateOrdertime($event)" type="number" matInput placeholder="0">
-          <span matSuffix>{{ product.UnitName }}</span>
-          <mat-label>Order amount</mat-label>
-        </mat-form-field>    
-      </mat-card-content>
-      <mat-divider inset></mat-divider>
-      <mat-card-actions>
-        Delivery time:
-        {{ deliveryDays }} days
-        <button class="float-right" mat-raised-button color="primary">ORDER</button>
-      </mat-card-actions>
-      <br />
-    </mat-card>
-  </div>
+<div class="h-96 min-h-full">
+  <mat-card>
+    <mat-card-title>{{ product.ProductName }}</mat-card-title>
+    <mat-card-content>
+      <mat-form-field class="" appearance="fill">
+        <input [(ngModel)]="orderAmount" (ngModelChange)="calculateOrdertime(orderAmount, expressShipping)" type="number" matInput placeholder="0">
+        <span matSuffix>{{ product.UnitName }}</span>
+        <mat-label>Order amount</mat-label>
+      </mat-form-field>    
+      <section class="example-section">
+        <mat-slide-toggle
+            class="example-margin"
+            color="primary"
+            [(ngModel)]="expressShipping"
+            (ngModelChange)="calculateOrdertime(orderAmount, expressShipping)">
+          Enable for express shipping
+        </mat-slide-toggle>
+      </section>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+      Order wil be delivered on:
+      {{ deliveryDays }}
+    </mat-card-actions>
+  </mat-card>
+</div>

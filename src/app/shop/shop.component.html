@@ -1,4 +1,6 @@
-<div *ngIf="productData.length > 0">
+<!-- marquee berre for fun :) -->
+<marquee class="bg-red-200">ORDERS BEFORE 12:00 ARE SENT THE SAME DAY</marquee>
+<div *ngIf="productData.length > 0" class="grid grid-cols-3">
   <div *ngFor="let product of productData" class="">
     <app-shop-card [product]="product"></app-shop-card>
   </div>

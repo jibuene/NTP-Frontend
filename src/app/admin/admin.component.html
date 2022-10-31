@@ -1,1 +1,138 @@
-<p>admin works!</p>
+<div class="px-3">
+  <div>
+    <h1 class="leading-tight text-2xl mt-0 mb-2 text-blue-400">Product</h1>
+    <table class="w-full">
+      <thead class="text-blue-200 uppercase bg-gray-700">
+        <tr>
+          <td>ProductName</td>
+          <td>UnitName</td>
+          <td>Delete</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b" *ngFor="let product of productData">
+          <td>{{ product.ProductName }}</td>
+          <td>{{ product.UnitName }}</td>
+          <td class="cursor-pointer" (click)="removeProduct(product.ProductId)">🗑</td>
+        </tr>
+        <tr class="border-b">
+          <td>
+            <mat-form-field>
+              <mat-label>ProductName</mat-label>
+              <input matInput [(ngModel)]="newProductName">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Choose measurement type</mat-label>
+              <mat-select [(ngModel)]="newProductUnit">
+                <mat-option *ngFor="let unit of unitData" [value]="unit.Id">
+                  {{unit.UnitName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-raised-button color="primary" (click)="addProduct(newProductName, newProductUnit)">Add new product</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="my-5 border-b ">
+    <h1 class="leading-tight text-2xl mt-0 mb-2 text-indigo-700">Unit</h1>
+    <table class="w-full">
+      <thead class="text-indigo-300 uppercase bg-gray-700">
+        <tr>
+          <td>UnitName</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b" *ngFor="let unit of unitData">
+          <td>{{ unit.UnitName }}</td>
+          <td></td>
+        </tr>
+        <tr class="border-b">
+          <td>
+            <mat-form-field>
+              <mat-label>UnitName</mat-label>
+              <input matInput [(ngModel)]="newUnitName">
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-raised-button color="primary" (click)="addUnit(newUnitName)">Add new unit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h1 class="leading-tight text-2xl mt-0 mb-2 text-red-600">Delivery Time</h1>
+    Get deliverytime of
+    <mat-form-field>
+      <mat-label>choose one</mat-label>
+      <mat-select  [(ngModel)]="newDeliveryTimeProductId">
+        <mat-option *ngFor="let product of productData" (click)="getDeliveryTimeByProduct(product.ProductId)" [value]="product.ProductId">
+          {{product.ProductName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <table class="w-full">
+      <thead class="text-red-300 uppercase bg-gray-700">
+        <tr>
+          <td>Min</td>
+          <td>Max</td>
+          <td>Days</td>
+          <td>Save</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b" *ngFor="let time of deliveryTimes">
+          <td>
+            <mat-form-field>
+              <mat-label>Min</mat-label>
+              <input type="number" matInput [(ngModel)]="time.min">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Max</mat-label>
+              <input type="number" matInput [(ngModel)]="time.max">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Days</mat-label>
+              <input type="number" matInput [(ngModel)]="time.time">
+            </mat-form-field>
+          </td>
+          <td (click)="updateDeliveryTime(time.Id)" class="cursor-pointer">💾</td>
+        </tr>
+        <tr class="border-b">
+          <td>
+            <mat-form-field>
+              <mat-label>Min</mat-label>
+              <input type="number" matInput [(ngModel)]="newDeliveryTimes.min">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Max</mat-label>
+              <input type="number" matInput [(ngModel)]="newDeliveryTimes.max">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Days</mat-label>
+              <input type="number" matInput [(ngModel)]="newDeliveryTimes.time">
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-raised-button color="primary" (click)="addDeliveryTime(newDeliveryTimes.min, newDeliveryTimes.max, newDeliveryTimes.time, newDeliveryTimeProductId)">Add new deliverytime</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

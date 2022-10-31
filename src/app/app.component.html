@@ -1,13 +1,13 @@
-<style>
-</style>
+<mat-toolbar>
+  <span>NTP App</span>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-raised-button color="primary">
+    <a routerLink="/shop" routerLinkActive="active" ariaCurrentWhenActive="page">Shop</a>
+  </button>
+  <button mat-raised-button color="accent">
+    <a routerLink="/admin" routerLinkActive="active" ariaCurrentWhenActive="page">Admin</a>
+  </button>
 
-<div>
-  <nav>
-    <ul>
-      <li><a routerLink="/shop" routerLinkActive="active" ariaCurrentWhenActive="page">Shop</a></li>
-      <li><a routerLink="/admin" routerLinkActive="active" ariaCurrentWhenActive="page">Admin</a></li>
-    </ul>
-  </nav>
-</div>
+</mat-toolbar>
 
 <router-outlet></router-outlet>

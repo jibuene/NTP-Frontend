@@ -16,6 +16,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { ShopCardComponent } from './shop-card/shop-card.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,11 @@ import { ShopCardComponent } from './shop-card/shop-card.component';
     MatDividerModule,
     MatButtonModule,
     MatInputModule,
+    MatTableModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'My-Xsrf-Cookie',

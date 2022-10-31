@@ -5,7 +5,7 @@ interface productData {
   ProductId: number;
 	ProductName: string;
 	UnitName: string;
-  DeliveryTimes: Array<{ min: number, max: number, time: number }>[];
+  DeliveryTimes: Array<{ min: number, max: number, time: number }>;
 }
 
 @Component({
@@ -21,25 +21,30 @@ export class ShopCardComponent implements OnInit {
     DeliveryTimes: []
   };
   orderAmount:number = 0;
-  deliveryDays:number = 0;
+  deliveryDays:string = 'Na';
+  expressShipping: boolean = false;
 
-  async calculateOrdertime (orderAmount:number) {
-    let currDay = DateTime.now()
+  async calculateOrdertime (orderAmount:number, expressShipping = false, currDay = DateTime.now()) {
     const Sunday = 7;
     const Saturday = 6;
 
-    const dt:any = this.product.DeliveryTimes.find((dt:any, idx: number) => dt.min < orderAmount && dt.max > orderAmount)
-    this.deliveryDays = dt === undefined ? NaN : dt.time
-    
-    while (this.deliveryDays > 0) {
-      console.log(currDay.toISO())
-      if (![Sunday, Saturday].includes(currDay.weekday)) {
-        this.deliveryDays --
+    const dt:any = this.product.DeliveryTimes.find((dt:any) => dt.min <= orderAmount && dt.max >= orderAmount)
+    if (dt) {
+      // make delivery one day faster if expressShipping is enabled
+      let idx = expressShipping ? 1 : 0
+      // If order is before 12 order will be sent today. Today counts as one of the delivery days
+      currDay.hour < 12 ? idx ++ : idx = idx
+      while (idx < dt.time) {
+        // Don't count weekends as delivery days
+        currDay = currDay.plus({ day: 1 })
+        if (![Sunday, Saturday].includes(currDay.weekday)) {
+          idx ++
+        }
       }
-      currDay = currDay.plus({ day: 1 })
+      this.deliveryDays = currDay.toLocaleString(DateTime.DATE_FULL)
+    } else {
+      this.deliveryDays = 'No estimated delivery on this order range'
     }
-    console.log('ferdig')
-    console.log(currDay.toISO())
   }
 
   constructor() { }
